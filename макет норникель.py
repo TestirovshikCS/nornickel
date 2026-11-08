@@ -723,11 +723,7 @@ st.subheader("🧩 Интерактивная 3D-визуализация")
 
 fig = create_3d_model()
 
-st.plotly_chart(
-    fig,
-    use_container_width=True,
-    key="planetary_gearbox_3d"
-)
+st.plotly_chart(fig)
 
 st.caption(
     "Используйте мышь или касание для вращения камеры, "
