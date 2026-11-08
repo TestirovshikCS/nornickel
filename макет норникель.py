@@ -612,30 +612,29 @@ def create_3d_model():
 
     # -------------------- ВИД СЦЕНЫ --------------------
 
-    fig.update_layout(
+        fig.update_layout(
         title="3D-модель редуктора",
-        autosize=True, # ЗАСТАВЛЯЕТ МОДЕЛЬ РАСТЯГИВАТЬСЯ НА ВСЮ ШИРИНУ ЭКРАНА СМАРТФОНА
-        height=400, # Идеальная высота для телефона, чтобы модель не обрезалась
+        width=500,        # Жесткая базовая ширина
+        height=500,       # Жесткая базовая высота (делаем квадрат, чтобы не сплющивало)
+        autosize=True,
         template="plotly_dark",
-        margin=dict(l=5, r=5, b=5, t=40), # Минимальные отступы по краям
+        margin=dict(l=10, r=10, b=10, t=50), # Небольшие отступы
         scene=dict(
             xaxis=dict(title="X", showbackground=True, backgroundcolor="#151b26"),
             yaxis=dict(title="Y", showbackground=True, backgroundcolor="#151b26"),
             zaxis=dict(title="Z", showbackground=True, backgroundcolor="#151b26"),
-            aspectmode="data",
-            # Настройка камеры, чтобы модель была по центру и целиком влезала в экран
+            aspectmode="cube", # Заставляем оси быть одинакового размера (куб), чтобы модель не вытягивало
             camera=dict(
-                eye=dict(x=1.4, y=1.4, z=1.1), # Чуть отдалили, чтобы она не вылезала за края
+                eye=dict(x=2.0, y=2.0, z=1.5), # Отодвинули камеру еще дальше, чтобы модель точно влезла
                 up=dict(x=0, y=0, z=1)
             )
         ),
-        # Убираем мешающие кнопки "Запустить/Пауза" наверх, чтобы они не лезли на модельку
         updatemenus=[
             dict(
                 type="buttons",
                 showactive=False,
                 x=0.0,
-                y=1.25,
+                y=1.15,
                 buttons=[
                     dict(
                         label="▶ ЗАПУСТИТЬ",
@@ -652,7 +651,6 @@ def create_3d_model():
         ]
     )
 
-    return fig
 
 # -------------------- ДИАГНОСТИКА --------------------
 
