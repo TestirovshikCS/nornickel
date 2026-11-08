@@ -614,41 +614,27 @@ def create_3d_model():
 
     fig.update_layout(
         title="3D-модель планетарного редуктора",
-        height=680,
+        height=500, # Уменьшили высоту, чтобы на телефоне модель не уползала вниз
         template="plotly_dark",
-        margin=dict(
-            l=0,
-            r=0,
-            b=0,
-            t=55
-        ),
+        margin=dict(l=0, r=0, b=0, t=40), # Полностью убрали отступы по бокам для мобилы
         scene=dict(
-            xaxis=dict(
-                title="X",
-                showbackground=True,
-                backgroundcolor="#151b26"
-            ),
-            yaxis=dict(
-                title="Y",
-                showbackground=True,
-                backgroundcolor="#151b26"
-            ),
-            zaxis=dict(
-                title="Z",
-                showbackground=True,
-                backgroundcolor="#151b26"
-            ),
+            xaxis=dict(title="X", showbackground=True, backgroundcolor="#151b26"),
+            yaxis=dict(title="Y", showbackground=True, backgroundcolor="#151b26"),
+            zaxis=dict(title="Z", showbackground=True, backgroundcolor="#151b26"),
             aspectmode="data",
+            # ПРИБЛИЖАЕМ КАМЕРУ: чтобы на экране смартфона шестеренки стали огромными
             camera=dict(
-                eye=dict(x=1.7, y=1.7, z=1.4)
+                eye=dict(x=1.1, y=1.1, z=0.9), # Камера стала в 2 раза ближе
+                up=dict(x=0, y=0, z=1)
             )
         ),
+        # Делаем кнопки компактными, чтобы они не перекрывали 3D на телефоне
         updatemenus=[
             dict(
                 type="buttons",
                 showactive=False,
                 x=0.02,
-                y=1.08,
+                y=1.12,
                 buttons=[
                     dict(
                         label="▶ ЗАПУСТИТЬ",
