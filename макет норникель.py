@@ -613,62 +613,39 @@ def create_3d_model():
     # -------------------- ВИД СЦЕНЫ --------------------
 
     fig.update_layout(
-        title="3D-модель планетарного редуктора",
-        height=500, # Уменьшили высоту, чтобы на телефоне модель не уползала вниз
+        title="3D-модель редуктора",
+        autosize=True, # ЗАСТАВЛЯЕТ МОДЕЛЬ РАСТЯГИВАТЬСЯ НА ВСЮ ШИРИНУ ЭКРАНА СМАРТФОНА
+        height=400, # Идеальная высота для телефона, чтобы модель не обрезалась
         template="plotly_dark",
-        margin=dict(l=0, r=0, b=0, t=40), # Полностью убрали отступы по бокам для мобилы
+        margin=dict(l=5, r=5, b=5, t=40), # Минимальные отступы по краям
         scene=dict(
             xaxis=dict(title="X", showbackground=True, backgroundcolor="#151b26"),
             yaxis=dict(title="Y", showbackground=True, backgroundcolor="#151b26"),
             zaxis=dict(title="Z", showbackground=True, backgroundcolor="#151b26"),
             aspectmode="data",
-            # ПРИБЛИЖАЕМ КАМЕРУ: чтобы на экране смартфона шестеренки стали огромными
+            # Настройка камеры, чтобы модель была по центру и целиком влезала в экран
             camera=dict(
-                eye=dict(x=1.1, y=1.1, z=0.9), # Камера стала в 2 раза ближе
+                eye=dict(x=1.4, y=1.4, z=1.1), # Чуть отдалили, чтобы она не вылезала за края
                 up=dict(x=0, y=0, z=1)
             )
         ),
-        # Делаем кнопки компактными, чтобы они не перекрывали 3D на телефоне
+        # Убираем мешающие кнопки "Запустить/Пауза" наверх, чтобы они не лезли на модельку
         updatemenus=[
             dict(
                 type="buttons",
                 showactive=False,
-                x=0.02,
-                y=1.12,
+                x=0.0,
+                y=1.25,
                 buttons=[
                     dict(
                         label="▶ ЗАПУСТИТЬ",
                         method="animate",
-                        args=[
-                            None,
-                            {
-                                "frame": {
-                                    "duration": animation_duration,
-                                    "redraw": True
-                                },
-                                "fromcurrent": True,
-                                "transition": {
-                                    "duration": 0
-                                }
-                            }
-                        ]
+                        args=[None, {"frame": {"duration": animation_duration, "redraw": True}, "fromcurrent": True}]
                     ),
                     dict(
                         label="⏸ ПАУЗА",
                         method="animate",
-                        args=[
-                            [None],
-                            {
-                                "mode": "immediate",
-                                "frame": {
-                                    "duration": 0,
-                                    "redraw": False
-                                },
-                                "transition": {
-                                    "duration": 0
-                                }
-                            }
-                        ]
+                        args=[[None], {"mode": "immediate", "frame": {"duration": 0, "redraw": False}}]
                     )
                 ]
             )
@@ -676,7 +653,6 @@ def create_3d_model():
     )
 
     return fig
-
 
 # -------------------- ДИАГНОСТИКА --------------------
 
