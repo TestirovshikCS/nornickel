@@ -613,28 +613,21 @@ def create_3d_model():
     # -------------------- ВИД СЦЕНЫ --------------------
 
     fig.update_layout(
-        title="3D-модель редуктора",
-        width=500,        # Жесткая базовая ширина
-        height=500,       # Жесткая базовая высота (делаем квадрат, чтобы не сплющивало)
-        autosize=True,
+        title="3D-визуализация планетарного редуктора",
         template="plotly_dark",
-        margin=dict(l=10, r=10, b=10, t=50), # Небольшие отступы
+        margin=dict(l=0, r=0, b=0, t=40),
         scene=dict(
-            xaxis=dict(title="X", showbackground=True, backgroundcolor="#151b26"),
-            yaxis=dict(title="Y", showbackground=True, backgroundcolor="#151b26"),
-            zaxis=dict(title="Z", showbackground=True, backgroundcolor="#151b26"),
-            aspectmode="cube", # Заставляем оси быть одинакового размера (куб), чтобы модель не вытягивало
-            camera=dict(
-                eye=dict(x=2.0, y=2.0, z=1.5), # Отодвинули камеру еще дальше, чтобы модель точно влезла
-                up=dict(x=0, y=0, z=1)
-            )
+            xaxis=dict(title="X"),
+            yaxis=dict(title="Y"),
+            zaxis=dict(title="Z"),
+            aspectmode="data"
         ),
         updatemenus=[
             dict(
                 type="buttons",
                 showactive=False,
-                x=0.0,
-                y=1.15,
+                y=1.1,
+                x=0.1,
                 buttons=[
                     dict(
                         label="▶ ЗАПУСТИТЬ",
@@ -650,6 +643,8 @@ def create_3d_model():
             )
         ]
     )
+
+    return fig
 
 
 # -------------------- ДИАГНОСТИКА --------------------
